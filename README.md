@@ -1,9 +1,11 @@
 # filebeat-kubernetes
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/apsops/filebeat-kubernetes.svg)](https://hub.docker.com/r/apsops/filebeat-kubernetes/)
-[![](https://images.microbadger.com/badges/image/apsops/filebeat-kubernetes.svg)](https://microbadger.com/images/apsops/filebeat-kubernetes "")
+[![Docker Pulls](https://img.shields.io/docker/pulls/0312birdzhang/filebeat-kubernetes.svg)](https://hub.docker.com/r/0312birdzhang/filebeat-kubernetes/)
+[![](https://images.microbadger.com/badges/image/0312birdzhang/filebeat-kubernetes.svg)](https://microbadger.com/images/0312birdzhang/filebeat-kubernetes "")
 
 Filebeat container, alternative to fluentd used to ship kubernetes cluster and pod logs
+
+Forked from https://github.com/ApsOps/filebeat-kubernetes
 
 ## Getting Started
 This container is designed to be run in a pod in Kubernetes to ship logs to kafka for further processing.
@@ -34,7 +36,7 @@ spec:
     spec:
       containers:
       - name: filebeat
-        image: 0312birdzhang/filebate-kubernetes:5.3.2
+        image: 0312birdzhang/filebeat-kubernetes:5.3.2
         resources:
           limits:
             cpu: 50m
