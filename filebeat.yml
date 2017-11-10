@@ -15,9 +15,18 @@ filebeat.prospectors:
     host: ${FILEBEAT_HOST:${HOSTNAME}}
   fields_under_root: true
 
-output.logstash:
-    hosts: ${LOGSTASH_HOSTS:?No logstash host configured. Use env var LOGSTASH_HOSTS to set hosts.}
-    timeout: 15
 
+output.kafka:
+  # initial brokers for reading cluster metadata"
+  hosts: ${KAFKA_HOSTS:?No kafka host configured. Use env var KAFKA_HOSTS to set hosts.}
+  # message topic selection + partitioning
+  topic: 'flamingo-logs-%{[type]}'
+  partition.round_robin:
+    reachable_only: false
+
+  required_acks: 1
+  compression: gzip
+  max_message_bytes: 1000000
+  
 logging.level: ${LOG_LEVEL:error}
 

@@ -6,16 +6,14 @@
 Filebeat container, alternative to fluentd used to ship kubernetes cluster and pod logs
 
 ## Getting Started
-This container is designed to be run in a pod in Kubernetes to ship logs to logstash for further processing.
+This container is designed to be run in a pod in Kubernetes to ship logs to kafka for further processing.
 You can provide following environment variables to customize it.
 
 ```bash
-LOGSTASH_HOSTS=example.com:4083,example.com:4084
+KAFKA_HOSTS=example.com:4083,example.com:4084
 LOG_LEVEL=info  # log level for filebeat. Defaults to "error".
 FILEBEAT_HOST=ip-a-b-c-d # custom "host" field. Refer following manifest to set it to k8s nodeName
 ```
-
-The endpoints listed by `LOGSTASH_HOSTS` should be listening with the [Beats input plugin](https://www.elastic.co/guide/en/logstash/5.6/plugins-inputs-beats.html).
 
 This should be run as a Kubernetes Daemonset (a pod on every node). Example manifest:
 
@@ -36,13 +34,13 @@ spec:
     spec:
       containers:
       - name: filebeat
-        image: apsops/filebeat-kubernetes:v0.4
+        image: 0312birdzhang/filebate-kubernetes:5.3.2
         resources:
           limits:
             cpu: 50m
             memory: 50Mi
         env:
-          - name: LOGSTASH_HOSTS
+          - name: KAFKA_HOSTS
             value: myhost.com:5000
           - name: LOG_LEVEL
             value: info
