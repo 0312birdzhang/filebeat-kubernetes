@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
       - name: filebeat
-        image: 0312birdzhang/filebeat-kubernetes:5.3.2
+        image: 0312birdzhang/filebeat-kubernetes:v1.0
         resources:
           limits:
             cpu: 50m
@@ -81,6 +81,9 @@ Make sure you add a filter in your logstash configuration if you want to process
 
 ```ruby
 filter {
+   json {
+		source => "message"
+  }
   if [type] == "kube-logs" {
 
     mutate {
